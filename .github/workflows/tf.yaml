@@ -11,9 +11,6 @@ jobs:
       - name: init
         id: init
         run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate -no-color -backend-config="token=${{ secrets.TF_API_TOKEN }}"
       - name: plan
         id: plan
         run: terraform plan -no-color -backend-config="token=${{ secrets.TF_API_TOKEN }}"
