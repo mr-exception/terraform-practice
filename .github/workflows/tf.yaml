@@ -11,14 +11,13 @@ jobs:
       - name: fmt
         id: fmt
         run: terraform fmt -check -backend-config="token=${{ secrets.TF_API_TOKEN }}"
-        continue-on-error: true
       - name: init
         id: init
         run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color -backend-config="token=${{ secrets.TF_API_TOKEN }}"
-      - name: Terraform Plan
+      - name: plan
         id: plan
         run: terraform plan -no-color -backend-config="token=${{ secrets.TF_API_TOKEN }}"
         continue-on-error: true

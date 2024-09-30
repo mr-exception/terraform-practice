@@ -1,6 +1,9 @@
 terraform {
   backend "remote" {
     organization = "salimon"
+    workspaces {
+      name = "terraform-practice"
+    }
   }
 }
 terraform {
