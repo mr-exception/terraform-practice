@@ -10,17 +10,17 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
       - name: fmt
         id: fmt
-        run: terraform fmt -check -backend-config="token=${{ secrets.TF_API_TOKEN }}" -backend-config="organization=salimon"
+        run: terraform fmt -check -backend-config="token=${{ secrets.TF_API_TOKEN }}"
         continue-on-error: true
       - name: init
         id: init
-        run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}" -backend-config="organization=salimon"
+        run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
       - name: Terraform Validate
         id: validate
-        run: terraform validate -no-color -backend-config="token=${{ secrets.TF_API_TOKEN }}" -backend-config="organization=salimon"
+        run: terraform validate -no-color -backend-config="token=${{ secrets.TF_API_TOKEN }}"
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color -backend-config="token=${{ secrets.TF_API_TOKEN }}" -backend-config="organization=salimon"
+        run: terraform plan -no-color -backend-config="token=${{ secrets.TF_API_TOKEN }}"
         continue-on-error: true
     #   - name: "Terraform Init"
     #     uses: hashicorp/setup-terraform@v3

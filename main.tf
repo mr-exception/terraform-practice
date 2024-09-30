@@ -1,4 +1,9 @@
 terraform {
+  backend "remote" {
+    organization = "salimon"
+  }
+}
+terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws",
