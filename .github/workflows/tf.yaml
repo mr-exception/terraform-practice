@@ -6,15 +6,28 @@ jobs:
     name: "Terraform"
     runs-on: ubuntu-latest
     steps:
-      - name: "Checkout"
-        uses: actions/checkout@master
-      - name: "Terraform Init"
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.12.13
-          tf_actions_subcommand: "init"
-          tf_actions_working_dir: "."
-          tf_actions_comment: true
-          args: '-backend-config="token=${{ secrets.TF_API_TOKEN }}" -backend-config="organization=salimon"'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - name: fmt
+        id: fmt
+        run: terraform fmt -check -backend-config="token=${{ secrets.TF_API_TOKEN }} -backend-config="organization=salimon"
+        continue-on-error: true
+      - name: init
+        id: init
+        run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }} -backend-config="organization=salimon"
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color -backend-config="token=${{ secrets.TF_API_TOKEN }} -backend-config="organization=salimon"
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -backend-config="token=${{ secrets.TF_API_TOKEN }} -backend-config="organization=salimon"
+        continue-on-error: true
+    #   - name: "Terraform Init"
+    #     uses: hashicorp/setup-terraform@v3
+    #     with:
+    #       tf_actions_subcommand: "init"
+    #       tf_actions_working_dir: "."
+    #       tf_actions_comment: true
+    #       args: '" -backend-config="organization=salimon"'
+    #     env:
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
