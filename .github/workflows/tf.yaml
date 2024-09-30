@@ -13,8 +13,11 @@ jobs:
         run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
       - name: plan
         id: plan
-        run: terraform plan -no-color -backend-config="token=${{ secrets.TF_API_TOKEN }}"
-        continue-on-error: true
+        run: terraform plan -no-color
+      - name: apply
+        id: apply
+        run: terraform apply -no-color
+
     #   - name: "Terraform Init"
     #     uses: hashicorp/setup-terraform@v3
     #     with:
