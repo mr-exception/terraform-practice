@@ -16,7 +16,7 @@ jobs:
         run: terraform plan -no-color
       - name: apply
         id: apply
-        run: terraform apply -no-color
+        run: terraform apply -no-color -auto-approve
 
     #   - name: "Terraform Init"
     #     uses: hashicorp/setup-terraform@v3
