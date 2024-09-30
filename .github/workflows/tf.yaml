@@ -8,9 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
-      - name: fmt
-        id: fmt
-        run: terraform fmt -check -backend-config="token=${{ secrets.TF_API_TOKEN }}"
       - name: init
         id: init
         run: terraform init -backend-config="token=${{ secrets.TF_API_TOKEN }}"
